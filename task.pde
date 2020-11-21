@@ -1,4 +1,13 @@
-String Todo;
-String Done;
-void write(){
+class task {
+  String Todo;
+  String Done;
+  task() {
+    Todo = "";
+    Done = "";
+  }
+  void write() {
+    
+  }
+  void keyPressed() {
+  }
 }

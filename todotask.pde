@@ -1,7 +1,6 @@
 ArrayList<String> Schedule; 
 int achivementPoint;
 int totalPoint;
-
 void target() {
   
 }
