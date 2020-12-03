@@ -1,4 +1,4 @@
-int state = 0;
+int condition = 0;
 PImage startbutton;
 PImage exitbutton;
 int startbuttonX = 500;
@@ -6,45 +6,55 @@ int startbuttonY = 210;
 int exitbuttonX = 500;
 int exitbuttonY = 350;
 
-void setup() {
-  size(1000, 800);
-  strokeWeight(2);
-  frameRate(10);
-  imageMode(CENTER); 
+todotask TDT = new todotask();
+
+void setup(){
+  size(1000,800); //size(1000,500);
+  imageMode(CENTER);
   startbutton = loadImage("software1.png");
   exitbutton = loadImage("software2.png");
 }
 
-void draw() {
-  if (state == 0) {
-    title();
-  } else if (state ==1) {
-    testDo();
-  } else if (state ==2) {
-    TDT.dayTask();
+void draw(){
+  background(255, 255, 255);
+  fill(252,132,3);
+  textSize(50);
+  text("MENU",430,110);    
+  if (condition == 0) {  // menu scene
+    image(startbutton,startbuttonX,startbuttonY,200,200); 
+    image(exitbutton,exitbuttonX,exitbuttonY,220,220);
+  }else if (condition == 1){
+    PFont font = createFont("HiraMaruProN-W4",24);
+    textFont(font);
+    textAlign(CENTER);
+    //strokeWeight(2);
+    play();
   }
 }
 
-todotask TDT = new todotask();
-
-void title() {
-  background(255);
-  fill(252,132,3);
-  textSize(50);
-  text("MENU",430,110);
-  textSize(10);
-  image(startbutton, startbuttonX, startbuttonY, 200, 200); 
-  image(exitbutton, exitbuttonX, exitbuttonY, 220, 220);
-  if(mousePressed && mouseX >= 425 && mouseX <= 570 && mouseY >= 175 && mouseY <= 240)
-     state = 1 ;
-     else if(mousePressed && mouseX >= 425 && mouseX <= 570 && mouseY >= 320 && mouseY <= 380)
+void mousePressed() {
+  if(condition == 0){
+     if(mousePressed && mouseX >= 425 && mouseX <= 570 && mouseY >= 175 && mouseY <= 240){
+     condition = 1 ;
+     }else if(mousePressed && mouseX >= 425 && mouseX <= 570 && mouseY >= 320 && mouseY <= 380){
      exit();
+     }else if(condition == 2){
+       gameClear();
+     }
+   }
+     
 }
 
+void keyReleased(){
+  if(condition == 1){
+    TDT.key();
+  }
+}
 
+void play(){
+  TDT.taskControll();
+}
 
-void testDo() {
-  TDT.drawCalendar();
-  state = 2;
-  TDT.target();
+void gameClear(){
+
 }
