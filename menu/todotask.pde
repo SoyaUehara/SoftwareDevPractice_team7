@@ -23,7 +23,7 @@ class todotask {
 
   todotask() {
     taskList = new ArrayList();
-    for (int i=0; i<31; i++) {
+    for (int i=0; i<days; i++) {
       task t = new task();
       taskList.add(t);
     }
