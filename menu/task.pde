@@ -3,7 +3,6 @@ class task {
   String Done;
   StringBuilder sb;
   char k;
-  
   task() {
     Todo = "";
     Done = "";
