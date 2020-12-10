@@ -29,6 +29,9 @@ void draw(){
     textAlign(CENTER);
     //strokeWeight(2);
     play();
+  }else if (condition == 3){
+    background(255, 255, 255);
+    TDT.Task();
   }
 }
 
@@ -38,23 +41,23 @@ void mousePressed() {
      condition = 1 ;
      }else if(mousePressed && mouseX >= 425 && mouseX <= 570 && mouseY >= 320 && mouseY <= 380){
      exit();
-     }else if(condition == 2){
-       gameClear();
-     }
-   }
-     
+    } else if (condition == 2) {
+      gameClear();
+    }
+  }if(condition == 3){
+    condition = 1;
+  }
 }
 
-void keyReleased(){
-  if(condition == 1){
+void keyPressed() {
+  if (condition == 1 && mousePressed == false) {
     TDT.key();
   }
 }
 
-void play(){
+void play() {
   TDT.taskControll();
 }
 
-void gameClear(){
-
+void gameClear() {
 }

@@ -1,8 +1,8 @@
-class todotask {
-
+class todotask { //<>// //<>//
   ArrayList<task> taskList; 
   int achivementPoint;
   int totalPoint;
+  int nowday = 0;
 
   int days = 30;
   int dayPoint = 0;
@@ -72,12 +72,17 @@ class todotask {
       for (int i = 0; i < days; i++) {
         if (coordinateList[i*2] <= mouseX && mouseX < coordinateList[i*2]+100 && coordinateList[(i/7*7)*2+1] <= mouseY && mouseY < coordinateList[(i/7*7)*2+1]+100) {
           // task code
-          taskList.get(i).write();
-          println(dayList[i]);
-          //
+          nowday = i;
+          condition = 3;
         }
+        //
       }
     }
+  }
+
+  void Task() {
+    taskList.get(nowday).p();
+    taskList.get(nowday).write();
   }
 
   void targetPress() {

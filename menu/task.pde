@@ -1,26 +1,42 @@
 class task {
   String Todo;
   String Done;
-  StringBuilder sb;
   char k;
+  boolean isTarget;
+  String data;
+  int count;
+  health h;
   task() {
     Todo = "";
     Done = "";
-    sb = new StringBuilder();
+    isTarget = false;
+    data = "";
+    count = 0;
   }
   void write() {
+    task_key();
+  }
+  void p() {
+    fill(0);
+    text(data, width*0.5, height*0.5);
+  }
+  void task_key() {
     if (keyPressed) {
-      if (key == BACKSPACE) {
-        if (sb.length() != 0) {
-          sb.delete(sb.length()-1, sb.length());
+      if (count >= 5) {
+        if (isTarget == false && data.length() <= 50) {
+          char keyData = key;
+          if (key == BACKSPACE && data.length() > 0) {
+            data = data.substring(0, data.length()-1);
+          } else {
+            data += keyData;
+          }
+        } else if (key == BACKSPACE && data.length() > 0) {
+          data = data.substring(0, data.length()-1);
         }
-      } else if (k!=key) {
-        sb.append(key);
-        k = key;
+        count = 0;
+      } else {
+        count ++;
       }
     }
-    fill(0);
-    textAlign(LEFT, LEFT);
-    text(sb.toString(), width*0.5, height*0.5);
   }
 }
