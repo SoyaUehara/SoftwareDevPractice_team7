@@ -1,4 +1,4 @@
-class todotask { //<>// //<>//
+class todotask {
   ArrayList<task> taskList; 
   int achivementPoint;
   int totalPoint;
@@ -21,7 +21,7 @@ class todotask { //<>// //<>//
 
   int pressEnterKey = 0;
 
-  todotask() {
+  void taskList() {
     taskList = new ArrayList();
     for (int i=0; i<days; i++) {
       task t = new task();
@@ -32,9 +32,9 @@ class todotask { //<>// //<>//
   void taskControll() {
     drawCalendar();
     target();
-    dayTask();
-    targetPress();
     drawTask();
+    targetPress();
+    dayTask();
   }
 
   void drawCalendar() {
@@ -73,16 +73,15 @@ class todotask { //<>// //<>//
         if (coordinateList[i*2] <= mouseX && mouseX < coordinateList[i*2]+100 && coordinateList[(i/7*7)*2+1] <= mouseY && mouseY < coordinateList[(i/7*7)*2+1]+100) {
           // task code
           nowday = i;
-          condition = 3;
+          condition = 3; //<>//
         }
-        //
       }
     }
   }
 
-  void Task() {
-    taskList.get(nowday).p();
-    taskList.get(nowday).write();
+  void task() {
+    taskList.get(nowday).write_print(taskList.get(nowday).mode);
+    taskList.get(TDT.nowday).TorD();
   }
 
   void targetPress() {

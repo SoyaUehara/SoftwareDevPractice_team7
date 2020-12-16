@@ -9,6 +9,7 @@ int exitbuttonY = 350;
 todotask TDT = new todotask();
 
 void setup(){
+  TDT.taskList();
   size(1000,800); //size(1000,500);
   imageMode(CENTER);
   startbutton = loadImage("software1.png");
@@ -31,7 +32,10 @@ void draw(){
     play();
   }else if (condition == 3){
     background(255, 255, 255);
-    TDT.Task();
+    TDT.taskList.get(TDT.nowday).todo_done();
+  }else if(condition == 4){
+    background(255, 255, 255);
+    TDT.task();
   }
 }
 
@@ -44,14 +48,20 @@ void mousePressed() {
     } else if (condition == 2) {
       gameClear();
     }
-  }if(condition == 3){
-    condition = 1;
+  }if(condition == 3 && mousePressed && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 240){
+    TDT.taskList.get(TDT.nowday).mode_reset();
+    condition =  1;
+  }
+  if(condition == 4 && mousePressed && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 240){
+    condition =  3;
   }
 }
 
 void keyPressed() {
-  if (condition == 1 && mousePressed == false) {
+  if (condition == 1 ) {
     TDT.key();
+  }else if(condition == 4){
+    TDT.taskList.get(TDT.nowday).write();
   }
 }
 
