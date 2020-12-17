@@ -73,7 +73,8 @@ class todotask {
         if (coordinateList[i*2] <= mouseX && mouseX < coordinateList[i*2]+100 && coordinateList[(i/7*7)*2+1] <= mouseY && mouseY < coordinateList[(i/7*7)*2+1]+100) {
           // task code
           nowday = i;
-          condition = 3; //<>//
+          taskList.get(i).day = i+1;
+          condition = 3;
         }
       }
     }
@@ -81,7 +82,7 @@ class todotask {
 
   void task() {
     taskList.get(nowday).write_print(taskList.get(nowday).mode);
-    taskList.get(TDT.nowday).TorD();
+    //taskList.get(TDT.nowday).TorD();
   }
 
   void targetPress() {

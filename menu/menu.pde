@@ -1,10 +1,29 @@
 int condition = 0;
-PImage startbutton;
+PImage menu;
+PImage home;
+PImage nutrition;
+PImage exercise;
+PImage health;
+PImage todo;
+PImage exit;
+PImage people;
 PImage exitbutton;
-int startbuttonX = 500;
-int startbuttonY = 210;
-int exitbuttonX = 500;
-int exitbuttonY = 350;
+int menuX = 500;
+int menuY = 70;
+int homeX = 500;
+int homeY = 170;
+int nutritionX = 500;
+int nutritionY = 260;
+int exerciseX = 500;
+int exerciseY = 350;
+int healthX = 500;
+int healthY = 440;
+int todoX = 500;
+int todoY = 530;
+int exitX = 500;
+int exitY = 620;
+int peopleX = 500;
+int peopleY = 725;
 
 todotask TDT = new todotask();
 
@@ -12,8 +31,14 @@ void setup(){
   TDT.taskList();
   size(1000,800); //size(1000,500);
   imageMode(CENTER);
-  startbutton = loadImage("software1.png");
-  exitbutton = loadImage("software2.png");
+  menu = loadImage("menu.png");
+  home = loadImage("home.png");
+  nutrition = loadImage("nutrition.png");
+  exercise = loadImage("exercise.png");
+  health = loadImage("health.png");
+  todo = loadImage("todo.png");
+  exit = loadImage("exit.png");
+  people = loadImage("01.png");
 }
 
 void draw(){
@@ -22,8 +47,14 @@ void draw(){
   textSize(50);
   text("MENU",430,110);    
   if (condition == 0) {  // menu scene
-    image(startbutton,startbuttonX,startbuttonY,200,200); 
-    image(exitbutton,exitbuttonX,exitbuttonY,220,220);
+    image(menu,menuX,menuY,200,100); 
+    image(home,homeX,homeY,200,100); 
+    image(nutrition,nutritionX,nutritionY,200,100); 
+    image(exercise,exerciseX,exerciseY,200,100); 
+    image(health,healthX,healthY,200,100); 
+    image(todo,todoX,todoY,200,100); 
+    image(exit,exitX,exitY,200,100); 
+    image(people,peopleX,peopleY,520,157); 
   }else if (condition == 1){
     PFont font = createFont("HiraMaruProN-W4",24);
     textFont(font);
@@ -41,9 +72,9 @@ void draw(){
 
 void mousePressed() {
   if(condition == 0){
-     if(mousePressed && mouseX >= 425 && mouseX <= 570 && mouseY >= 175 && mouseY <= 240){
-     condition = 1 ;
-     }else if(mousePressed && mouseX >= 425 && mouseX <= 570 && mouseY >= 320 && mouseY <= 380){
+     if(mousePressed && mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560){
+     condition = 1 ; //<>//
+     }else if(mousePressed && mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620){
      exit();
     } else if (condition == 2) {
       gameClear();
