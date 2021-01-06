@@ -3,6 +3,7 @@ class task {
   String Done;
   String mode;
   int day;
+  int daypoint;
   char k;
   PImage todo_image;
   PImage done_image;
@@ -90,11 +91,15 @@ class task {
     mode = "";
   }
   
-  boolean todo_done_jugde(){
-    if(Todo == Done){
-      return true;
+  void todo_done_judge(){
+    if(Todo.length() > 0 && Done.length() > 0){
+      if(Todo.equals(Done)){
+        daypoint = 2;//todo達成
+      }
+      else{
+        daypoint = 1;//todo未達成
+      }
     }
-    return false;
   }
   
   void delete_task(){

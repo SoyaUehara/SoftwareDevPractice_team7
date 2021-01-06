@@ -63,6 +63,7 @@ class todotask {
 
   void drawTask() {
     for (int i = 0; i < days; i++) {
+      taskList.get(i).todo_done_judge();
       judgeDraw(i);
     }
   }
@@ -113,13 +114,13 @@ class todotask {
   }
 
   void judgeDraw(int i) {
-    if (dayPointList[i] == 0) {
-    } else if (dayPointList[i] == 1) {
+    if (taskList.get(i).daypoint == 0) {
+    } else if (taskList.get(i).daypoint == 1) {
       line(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, coordinateList[i*2]+50+15, coordinateList[(i/7*7)*2+1]+50+15);
       line(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, coordinateList[i*2]+50+15, coordinateList[(i/7*7)*2+1]+50-15);
       line(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, coordinateList[i*2]+50-15, coordinateList[(i/7*7)*2+1]+50+15);
       line(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, coordinateList[i*2]+50-15, coordinateList[(i/7*7)*2+1]+50-15);
-    } else if (dayPointList[i] == 2) {
+    } else if (taskList.get(i).daypoint == 2) {
       ellipse(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, 30, 30);
     }
   }
