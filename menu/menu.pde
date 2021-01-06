@@ -1,29 +1,13 @@
 int condition = 0;
-PImage menu;
-PImage home;
-PImage nutrition;
-PImage exercise;
-PImage health;
-PImage todo;
-PImage exit;
-PImage people;
-PImage exitbutton;
-int menuX = 500;
-int menuY = 70;
-int homeX = 500;
-int homeY = 170;
-int nutritionX = 500;
-int nutritionY = 260;
-int exerciseX = 500;
-int exerciseY = 350;
-int healthX = 500;
-int healthY = 440;
-int todoX = 500;
-int todoY = 530;
-int exitX = 500;
-int exitY = 620;
-int peopleX = 500;
-int peopleY = 725;
+PImage menu,home,nutrition,exercise,health,todo,exit,people,exitbutton;//画像読み込み
+int menuX = 500,menuY = 70;//menuの座標
+int homeX = 500,homeY = 170;//homeの座標
+int nutritionX = 500,nutritionY = 260;//nutritionの座標
+int exerciseX = 500,exerciseY = 350;//exerciseの座標
+int healthX = 500,healthY = 440;//healthの座標
+int todoX = 500,todoY = 530;//todoの座標
+int exitX = 500,exitY = 620;//exitの座標
+int peopleX = 500,peopleY = 725;//peopleの座標
 
 todotask TDT = new todotask();
 
@@ -73,6 +57,7 @@ void draw(){
 void mousePressed() {
   if(condition == 0){
      if(mousePressed && mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560){
+       mouse_reset();
      condition = 1 ; //<>//
      }else if(mousePressed && mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620){
      exit();
@@ -101,4 +86,9 @@ void play() {
 }
 
 void gameClear() {
+}
+
+void mouse_reset(){
+  mouseX = 0;
+  mouseY = 0;
 }

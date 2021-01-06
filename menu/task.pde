@@ -3,30 +3,34 @@ class task {
   String Done;
   String mode;
   int day;
-  
   char k;
-  
+  PImage todo_image;
+  PImage done_image;
+  int todoX = 500, todoY = 240;
+  int doneX = 500, doneY = 440;
   health h;
   
   task() {
     Todo = "";
     Done = "";
+    todo_image = loadImage("to_do.png");
+    done_image = loadImage("Done.png");
   }
   
   void todo_done(){//todoとdoneの表示
     textSize(30);
     fill(255);
-    rect(400, 200, 200, 50);
-    rect(400, 400, 200, 50);
+    rect(399, 189, 201, 101);
+    rect(399, 389, 201, 101);
     fill(0);
-    text("Todo", 500, 240);
-    text("Done", 500, 440);
+    image(todo_image,todoX,todoY,200,100);
+    image(done_image,doneX,doneY,200,100);
     base_print();
-    if(mousePressed && mouseX >= 400 && mouseX <= 600 && mouseY >= 200 && mouseY <= 250){
+    if(mousePressed && mouseX >= 399 && mouseX <= 600 && mouseY >= 189 && mouseY <= 290){
       mode = "T";
       condition =  4;
     }
-    if(mousePressed && mouseX >= 400 && mouseX <= 600 && mouseY >= 400 && mouseY <= 450){
+    if(mousePressed && mouseX >= 399 && mouseX <= 600 && mouseY >= 389 && mouseY <= 490){
       mode = "D";
       condition =  4;
     }
@@ -41,13 +45,13 @@ class task {
     }
   }
   
-  void write_print(String m) {
+  void write_print() {
     textSize(30);
     fill(0);
-    if(m == "T"){
+    if(mode == "T"){
       text(Todo, width*0.5, height*0.5);
     }
-    if(m == "D"){
+    if(mode == "D"){
       text(Done, width*0.5, height*0.5);
     }
     base_print();
@@ -59,6 +63,13 @@ class task {
     fill(0);
     text("back>>", 900, 40);
     text(day, 30, 40);
+    if(condition == 4){
+      if(mode== "T"){
+        text("To do",100,40);
+      }else if(mode == "D"){
+        text("Done",100,40);
+      }
+    }
   }
   
   String task_key(String d) {

@@ -75,14 +75,15 @@ class todotask {
           nowday = i;
           taskList.get(i).day = i+1;
           condition = 3;
+          mouseX = 0;
+          mouseY = 0;
         }
       }
     }
   }
 
   void task() {
-    taskList.get(nowday).write_print(taskList.get(nowday).mode);
-    //taskList.get(TDT.nowday).TorD();
+    taskList.get(nowday).write_print();
   }
 
   void targetPress() {
