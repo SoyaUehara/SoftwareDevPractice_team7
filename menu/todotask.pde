@@ -20,6 +20,8 @@ class todotask {
   String data = "あああああ";
 
   int pressEnterKey = 0;
+  String filename = "database/todo.csv";
+  boolean set_TorF = true;
 
   void taskList() {
     taskList = new ArrayList();
@@ -72,12 +74,23 @@ class todotask {
     if (mousePressed == true) {
       for (int i = 0; i < days; i++) {
         if (coordinateList[i*2] <= mouseX && mouseX < coordinateList[i*2]+100 && coordinateList[(i/7*7)*2+1] <= mouseY && mouseY < coordinateList[(i/7*7)*2+1]+100) {
-          // task code
-          nowday = i;
-          taskList.get(i).day = i+1;
-          condition = 3;
-          mouseX = 0;
-          mouseY = 0;
+          println((i+1)+"日が押された");
+          if (i == 0){
+            // task code
+            nowday = i;
+            taskList.get(i).day = i+1;
+            condition = 3;
+            mouseX = 0;
+            mouseY = 0;
+          }else if (taskList.get(i-1).Todo.length() > 0){
+            // task code
+            nowday = i;
+            taskList.get(i).day = i+1;
+            condition = 3;
+            mouseX = 0;
+            mouseY = 0;
+          }
+          
         }
       }
     }
@@ -150,5 +163,22 @@ class todotask {
     } else if (key == BACKSPACE && data.length() > 0) {
       data = data.substring(0, data.length()-1);
     }
+  }
+  void csv_write(){
+    String[] todo_data = loadStrings(filename);
+    if(set_TorF){
+      for(int i=0; i<todo_data.length-1; i++){
+        String[] data = todo_data[i+1].split(",", -1);
+        taskList.get(i).Todo = data[0];
+        taskList.get(i).Done = data[1];
+      }
+      set_TorF = false;
+    }
+    else{
+      for(int i=0; i<todo_data.length-1; i++){
+        todo_data[i+1] = ""+taskList.get(i).Todo+","+taskList.get(i).Done;
+      }
+    }
+    saveStrings(filename, todo_data);
   }
 }

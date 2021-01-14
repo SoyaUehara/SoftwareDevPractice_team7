@@ -11,7 +11,7 @@ class test{
   int targetGrenn;
   int targetCalorie;
   
-  String filename = "test.csv";
+  String filename = "database/test.csv";
   
   void getData(){
     String[] lines = loadStrings(filename);

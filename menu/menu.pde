@@ -10,6 +10,7 @@ int exitX = 500,exitY = 620;//exitの座標
 int peopleX = 500,peopleY = 725;//peopleの座標
 
 todotask TDT = new todotask();
+test T = new test();
 
 void setup(){
   TDT.taskList();
@@ -29,7 +30,7 @@ void draw(){
   background(255, 255, 255);
   fill(252,132,3);
   textSize(50);
-  text("MENU",430,110);    
+  text("MENU",430,110);
   if (condition == 0) {  // menu scene
     image(menu,menuX,menuY,200,100); 
     image(home,homeX,homeY,200,100); 
@@ -46,6 +47,7 @@ void draw(){
     //strokeWeight(2);
     play();
   }else if (condition == 3){
+    TDT.csv_write();
     background(255, 255, 255);
     TDT.taskList.get(TDT.nowday).todo_done();
   }else if(condition == 4){
@@ -53,23 +55,25 @@ void draw(){
     TDT.task();
   }
 }
-
-void mousePressed() {
+void mousePressed(){
+  if(condition == 3 && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 240){
+    TDT.taskList.get(TDT.nowday).mode_reset();
+    condition =  1;
+  }
+  if(condition == 4 && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 240){
+    condition =  3;
+  }
+}
+void mouseClicked() {
   if(condition == 0){
-     if(mousePressed && mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560){
-       mouse_reset();
+     if(mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560){
+       TDT.csv_write();
      condition = 1 ; //<>//
-     }else if(mousePressed && mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620){
+     }else if(mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620){
      exit();
     } else if (condition == 2) {
       gameClear();
     }
-  }if(condition == 3 && mousePressed && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 240){
-    TDT.taskList.get(TDT.nowday).mode_reset();
-    condition =  1;
-  }
-  if(condition == 4 && mousePressed && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 240){
-    condition =  3;
   }
 }
 
