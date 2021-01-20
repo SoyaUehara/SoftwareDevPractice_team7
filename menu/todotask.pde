@@ -15,6 +15,8 @@ class todotask {
   boolean clearTarget = false;
 
   boolean isAchivement = false;
+  
+  boolean isSetTextArea = false;
 
   char keyData;
   String data = "あああああ";
@@ -30,10 +32,11 @@ class todotask {
       taskList.add(t);
     }
   }
-
+  
   void taskControll() {
     drawCalendar();
     target();
+    drawTextArea();
     drawTask();
     targetPress();
     dayTask();
@@ -123,6 +126,17 @@ class todotask {
       text(data, 1000/2, 100/2);
       rect(0, 100, 200, 50);
       text("Delete", (0 + 200)/2, (100 + 150)/2);
+    }
+  }
+  
+  
+  void drawTextArea(){
+    if(isSetTextArea == false){
+      setTextarea(0,700,1000,100);
+      
+      isSetTextArea = true;
+    } else if (isSetTextArea == true) {
+    
     }
   }
 

@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+
 int condition = 0;
 PImage menu,home,nutrition,exercise,health,todo,exit,people,exitbutton;//画像読み込み
 int menuX = 500,menuY = 70;//menuの座標
@@ -8,6 +11,9 @@ int healthX = 500,healthY = 440;//healthの座標
 int todoX = 500,todoY = 530;//todoの座標
 int exitX = 500,exitY = 620;//exitの座標
 int peopleX = 500,peopleY = 725;//peopleの座標
+
+JLayeredPane pane;
+JTextArea area;
 
 todotask TDT = new todotask();
 test T = new test();
@@ -78,10 +84,13 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if (condition == 1 ) {
+  if (condition == 1) {
     TDT.key();
   }else if(condition == 4){
     TDT.taskList.get(TDT.nowday).write();
+  if (keyCode==ENTER) {
+    area.setText("");
+  }
   }
 }
 
@@ -95,4 +104,20 @@ void gameClear() {
 void mouse_reset(){
   mouseX = 0;
   mouseY = 0;
+}
+
+void setTextarea(int x,int y,int xx,int yy){
+  
+  // enter japanese key code
+  
+  Canvas canvas = (Canvas) surface.getNative();
+  pane = (JLayeredPane) canvas.getParent().getParent();
+  
+  area = new JTextArea();
+  area.setLineWrap(true);
+  area.setWrapStyleWord(true);
+  JScrollPane scrollPane = new JScrollPane(area);
+  scrollPane.setBounds(x, y, xx, yy);
+  pane.add(scrollPane);
+  
 }
