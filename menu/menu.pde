@@ -1,16 +1,16 @@
-import javax.swing.*;
+import javax.swing.*; //<>//
 import java.awt.*;
 
 int condition = 0;
-PImage menu,home,nutrition,exercise,health,todo,exit,people,exitbutton;//画像読み込み
-int menuX = 500,menuY = 70;//menuの座標
-int homeX = 500,homeY = 170;//homeの座標
-int nutritionX = 500,nutritionY = 260;//nutritionの座標
-int exerciseX = 500,exerciseY = 350;//exerciseの座標
-int healthX = 500,healthY = 440;//healthの座標
-int todoX = 500,todoY = 530;//todoの座標
-int exitX = 500,exitY = 620;//exitの座標
-int peopleX = 500,peopleY = 725;//peopleの座標
+PImage menu, home, nutrition, exercise, health, todo, exit, people, exitbutton;//画像読み込み
+int menuX = 500, menuY = 70;//menuの座標
+int homeX = 500, homeY = 170;//homeの座標
+int nutritionX = 500, nutritionY = 260;//nutritionの座標
+int exerciseX = 500, exerciseY = 350;//exerciseの座標
+int healthX = 500, healthY = 440;//healthの座標
+int todoX = 500, todoY = 530;//todoの座標
+int exitX = 500, exitY = 620;//exitの座標
+int peopleX = 500, peopleY = 725;//peopleの座標
 
 JLayeredPane pane;
 JTextArea area;
@@ -18,9 +18,9 @@ JTextArea area;
 todotask TDT = new todotask();
 test T = new test();
 
-void setup(){
+void setup() {
   TDT.taskList();
-  size(1000,800); //size(1000,500);
+  size(1000, 800); //size(1000,500);
   imageMode(CENTER);
   menu = loadImage("menu.png");
   home = loadImage("home.png");
@@ -32,51 +32,50 @@ void setup(){
   people = loadImage("01.png");
 }
 
-void draw(){
+void draw() {
   background(255, 255, 255);
-  fill(252,132,3);
-  textSize(50);
-  text("MENU",430,110);
   if (condition == 0) {  // menu scene
-    image(menu,menuX,menuY,200,100); 
-    image(home,homeX,homeY,200,100); 
-    image(nutrition,nutritionX,nutritionY,200,100); 
-    image(exercise,exerciseX,exerciseY,200,100); 
-    image(health,healthX,healthY,200,100); 
-    image(todo,todoX,todoY,200,100); 
-    image(exit,exitX,exitY,200,100); 
-    image(people,peopleX,peopleY,520,157); 
-  }else if (condition == 1){
-    PFont font = createFont("HiraMaruProN-W4",24);
+    image(menu, menuX, menuY, 200, 100); 
+    image(home, homeX, homeY, 200, 100); 
+    image(nutrition, nutritionX, nutritionY, 200, 100); 
+    image(exercise, exerciseX, exerciseY, 200, 100); 
+    image(health, healthX, healthY, 200, 100); 
+    image(todo, todoX, todoY, 200, 100); 
+    image(exit, exitX, exitY, 200, 100); 
+    image(people, peopleX, peopleY, 520, 157);
+  } else if (condition == 1) {
+    PFont font = createFont("HiraMaruProN-W4", 24);
     textFont(font);
     textAlign(CENTER);
     //strokeWeight(2);
     play();
-  }else if (condition == 3){
+  } else if (condition == 3) {
     TDT.csv_write();
     background(255, 255, 255);
     TDT.taskList.get(TDT.nowday).todo_done();
-  }else if(condition == 4){
+  } else if (condition == 4) {
     background(255, 255, 255);
     TDT.task();
   }
 }
-void mousePressed(){
-  if(condition == 3 && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 240){
+void mousePressed() {
+  if (condition == 1 && mouseX >= 900 && mouseX <= 1000 && mouseY >= 100 && mouseY <= 150) {
+    condition = 0;
+  }
+  if (condition == 3 && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 50) {
     TDT.taskList.get(TDT.nowday).mode_reset();
     condition =  1;
   }
-  if(condition == 4 && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 240){
+  if (condition == 4 && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 50) {
     condition =  3;
   }
 }
 void mouseClicked() {
-  if(condition == 0){
-     if(mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560){
-       TDT.csv_write();
-     condition = 1 ; //<>//
-     }else if(mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620){
-     exit();
+  if (condition == 0) {
+    if (mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560) {
+      condition = 1 ;
+    } else if (mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620) {
+      exit();
     } else if (condition == 2) {
       gameClear();
     }
@@ -86,11 +85,11 @@ void mouseClicked() {
 void keyPressed() {
   if (condition == 1) {
     TDT.key();
-  }else if(condition == 4){
+  } else if (condition == 4) {
     TDT.taskList.get(TDT.nowday).write();
-  if (keyCode==ENTER) {
-    area.setText("");
-  }
+    if (keyCode==ENTER) {
+      area.setText("");
+    }
   }
 }
 
@@ -101,23 +100,22 @@ void play() {
 void gameClear() {
 }
 
-void mouse_reset(){
+void mouse_reset() {
   mouseX = 0;
   mouseY = 0;
 }
 
-void setTextarea(int x,int y,int xx,int yy){
-  
+void setTextarea(int x, int y, int xx, int yy) {
+
   // enter japanese key code
-  
+
   Canvas canvas = (Canvas) surface.getNative();
   pane = (JLayeredPane) canvas.getParent().getParent();
-  
+
   area = new JTextArea();
   area.setLineWrap(true);
   area.setWrapStyleWord(true);
   JScrollPane scrollPane = new JScrollPane(area);
   scrollPane.setBounds(x, y, xx, yy);
   pane.add(scrollPane);
-  
 }

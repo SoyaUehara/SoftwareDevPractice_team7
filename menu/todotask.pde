@@ -31,8 +31,9 @@ class todotask {
       task t = new task();
       taskList.add(t);
     }
+    csv_write();
   }
-  
+
   void taskControll() {
     drawCalendar();
     target();
@@ -40,6 +41,7 @@ class todotask {
     drawTask();
     targetPress();
     dayTask();
+    back();
   }
 
   void drawCalendar() {
@@ -78,22 +80,26 @@ class todotask {
       for (int i = 0; i < days; i++) {
         if (coordinateList[i*2] <= mouseX && mouseX < coordinateList[i*2]+100 && coordinateList[(i/7*7)*2+1] <= mouseY && mouseY < coordinateList[(i/7*7)*2+1]+100) {
           println((i+1)+"日が押された");
-          if (i == 0){
-            // task code
-            nowday = i;
-            taskList.get(i).day = i+1;
-            condition = 3;
-            mouseX = 0;
-            mouseY = 0;
-          }else if (taskList.get(i-1).Todo.length() > 0){
-            // task code
-            nowday = i;
-            taskList.get(i).day = i+1;
-            condition = 3;
-            mouseX = 0;
-            mouseY = 0;
+          if (isTarget) {
+            taskList.get(i).delete_task();
+            csv_write();
+          } else {
+            if (i == 0) {
+              // task code
+              nowday = i;
+              taskList.get(i).day = i+1;
+              condition = 3;
+              mouseX = 0;
+              mouseY = 0;
+            } else if (taskList.get(i-1).Todo.length() > 0) {
+              // task code
+              nowday = i;
+              taskList.get(i).day = i+1;
+              condition = 3;
+              mouseX = 0;
+              mouseY = 0;
+            }
           }
-          
         }
       }
     }
@@ -128,15 +134,14 @@ class todotask {
       text("Delete", (0 + 200)/2, (100 + 150)/2);
     }
   }
-  
-  
-  void drawTextArea(){
-    if(isSetTextArea == false){
-      setTextarea(0,700,1000,100);
-      
+
+
+  void drawTextArea() {
+    if (isSetTextArea == false) {
+      setTextarea(0, 700, 1000, 100);
+
       isSetTextArea = true;
     } else if (isSetTextArea == true) {
-    
     }
   }
 
@@ -178,21 +183,26 @@ class todotask {
       data = data.substring(0, data.length()-1);
     }
   }
-  void csv_write(){
+  void csv_write() {
     String[] todo_data = loadStrings(filename);
-    if(set_TorF){
-      for(int i=0; i<todo_data.length-1; i++){
+    if (set_TorF) {
+      for (int i=0; i<todo_data.length-1; i++) {
         String[] data = todo_data[i+1].split(",", -1);
         taskList.get(i).Todo = data[0];
         taskList.get(i).Done = data[1];
       }
       set_TorF = false;
-    }
-    else{
-      for(int i=0; i<todo_data.length-1; i++){
+    } else {
+      for (int i=0; i<todo_data.length-1; i++) {
         todo_data[i+1] = ""+taskList.get(i).Todo+","+taskList.get(i).Done;
       }
     }
     saveStrings(filename, todo_data);
+  }
+  void back() {
+    fill(255);
+    rect(900, 100, 100, 50);
+    fill(0);
+    text("back>>", 950, 140);
   }
 }
