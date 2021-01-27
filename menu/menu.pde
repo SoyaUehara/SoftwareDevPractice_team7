@@ -17,6 +17,8 @@ JTextArea area;
 
 todotask TDT = new todotask();
 test T = new test();
+health HEL = new health();
+
 
 void setup() {
   TDT.taskList();
@@ -49,6 +51,12 @@ void draw() {
     textAlign(CENTER);
     //strokeWeight(2);
     play();
+  } else if (condition == 10) {
+    PFont font = createFont("HiraMaruProN-W4", 24);
+    textFont(font);
+    textAlign(CENTER);
+    //strokeWeight(2);
+    play_1();
   } else if (condition == 3) {
     TDT.csv_write();
     background(255, 255, 255);
@@ -56,10 +64,16 @@ void draw() {
   } else if (condition == 4) {
     background(255, 255, 255);
     TDT.task();
+  } else if (condition == 11) {
+    background(255, 255, 255);
+    HEL.task();
   }
 }
 void mousePressed() {
   if (condition == 1 && mouseX >= 900 && mouseX <= 1000 && mouseY >= 100 && mouseY <= 150) {
+    condition = 0;
+  }
+  if (condition == 10 && mouseX >= 900 && mouseX <= 1000 && mouseY >= 100 && mouseY <= 150) {
     condition = 0;
   }
   if (condition == 3 && mouseX >= 800 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 50) {
@@ -74,6 +88,8 @@ void mouseClicked() {
   if (condition == 0) {
     if (mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560) {
       condition = 1 ;
+    } else if (mouseX >= 450 && mouseX <= 550 && mouseY >= 440 && mouseY <= 500) {
+      condition = 10 ;
     } else if (mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620) {
       exit();
     } else if (condition == 2) {
@@ -85,6 +101,8 @@ void mouseClicked() {
 void keyPressed() {
   if (condition == 1) {
     TDT.key();
+    } else if (condition == 10) {
+    HEL.key();
   } else if (condition == 4) {
     TDT.taskList.get(TDT.nowday).write();
     if (keyCode==ENTER) {
@@ -95,6 +113,14 @@ void keyPressed() {
 
 void play() {
   TDT.taskControll();
+}
+
+void play_1() {
+  HEL.taskControll();
+}
+
+void motion() {
+  HEL.motion();
 }
 
 void gameClear() {
