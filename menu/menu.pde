@@ -16,9 +16,7 @@ JLayeredPane pane;
 JTextArea area;
 
 todotask TDT = new todotask();
-test T = new test();
 health HEL = new health();
-
 
 void setup() {
   TDT.taskList();

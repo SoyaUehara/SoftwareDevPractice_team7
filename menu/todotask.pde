@@ -19,7 +19,7 @@ class todotask {
   boolean isSetTextArea = false;
 
   char keyData;
-  String data = "あああああ";
+  String data = "";
 
   int pressEnterKey = 0;
   String filename = "database/todo.csv";
@@ -138,7 +138,7 @@ class todotask {
 
   void drawTextArea() {
     if (isSetTextArea == false) {
-      setTextarea(0, 700, 1000, 100);
+      //setTextarea(0, 700, 1000, 100);
 
       isSetTextArea = true;
     } else if (isSetTextArea == true) {
