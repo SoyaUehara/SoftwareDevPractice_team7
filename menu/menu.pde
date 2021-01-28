@@ -103,9 +103,6 @@ void keyPressed() {
     HEL.key();
   } else if (condition == 4) {
     TDT.taskList.get(TDT.nowday).write();
-    if (keyCode==ENTER) {
-      area.setText("");
-    }
   }
 }
 
