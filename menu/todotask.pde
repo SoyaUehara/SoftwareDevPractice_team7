@@ -6,6 +6,7 @@ class todotask {
 
   int days = 30;
   int dayPoint = 0;
+  int clearPoint = 30;
 
   int[] dayList = new int[days];
   int[] coordinateList = new int[days*2];
@@ -17,6 +18,9 @@ class todotask {
   boolean isAchivement = false;
   
   boolean isSetTextArea = false;
+   
+  boolean isClear = false;
+  boolean isDrawClear = false;
 
   char keyData;
   String data = "";
@@ -42,6 +46,7 @@ class todotask {
     targetPress();
     dayTask();
     back();
+    result();
   }
 
   void drawCalendar() {
@@ -157,20 +162,28 @@ class todotask {
     }
   }
 
-
   void judgeAchivement() {
     if (isAchivement == true) {
       condition = 2;
     }
   }
 
-  void calcPoint() {
-    dayPoint = 0;
+  int calcPoint() {
+    dayPoint = 300;
     for (int i = 0; i < days; i++) {
       dayPoint += dayPointList[i] - 1;
     }
+    return dayPoint;
   }
-
+  
+  void result(){
+    if (calcPoint() > clearPoint && isClear == false){
+      isClear = true;
+      condition = 5;
+    } else if (calcPoint() < clearPoint){
+    }
+  }
+  
   void key() {
     if (isTarget == false && data.length() <= 50) {
       keyData = key;

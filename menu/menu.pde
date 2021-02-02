@@ -65,6 +65,10 @@ void draw() {
   } else if (condition == 11) {
     background(255, 255, 255);
     HEL.task();
+  } else if (condition == 5){
+    background(255,255,255);
+    gameClear();
+
   }
 }
 void mousePressed() {
@@ -82,6 +86,7 @@ void mousePressed() {
     condition =  3;
   }
 }
+
 void mouseClicked() {
   if (condition == 0) {
     if (mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560) {
@@ -90,8 +95,6 @@ void mouseClicked() {
       condition = 10 ;
     } else if (mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620) {
       exit();
-    } else if (condition == 2) {
-      gameClear();
     }
   }
 }
@@ -119,6 +122,17 @@ void motion() {
 }
 
 void gameClear() {
+  text("GameClear", 1000/2, 800/2);
+  fill(255);
+  rect(450,550,100,50);
+  fill(0);
+  text("back",(450 + 550)/2, (550 + 600)/2);
+  if (mousePressed == true) {
+    if (450 <= mouseX && mouseX < 550 && 550 <= mouseY && mouseY < 600 && TDT.isClear == true) {
+      mouse_reset();
+      condition = 0;
+    }
+  }
 }
 
 void mouse_reset() {
