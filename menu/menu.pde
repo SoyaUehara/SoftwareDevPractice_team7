@@ -49,6 +49,7 @@ void draw() {
     textAlign(CENTER);
     //strokeWeight(2);
     play();
+    TDT.csv_write();
   } else if (condition == 10) {
     PFont font = createFont("HiraMaruProN-W4", 24);
     textFont(font);
@@ -95,6 +96,17 @@ void mouseClicked() {
       condition = 10 ;
     } else if (mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620) {
       exit();
+    }
+  }
+  else if(condition == 1 && (mouseButton == RIGHT || (keyPressed == true && keyCode == CONTROL))){
+    if(TDT.dayPointList[TDT.nowday] == 0){
+      TDT.dayPointList[TDT.nowday] = 1;
+    }
+    else if(TDT.dayPointList[TDT.nowday] == 1){
+      TDT.dayPointList[TDT.nowday] = -1;
+    }
+    else if(TDT.dayPointList[TDT.nowday] == -1){
+      TDT.dayPointList[TDT.nowday] = 0;
     }
   }
 }

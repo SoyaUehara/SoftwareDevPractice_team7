@@ -26,7 +26,8 @@ class todotask {
   String data = "";
 
   int pressEnterKey = 0;
-  String filename = "database/todo.csv";
+  String filename_todo = "database/todo.csv";
+  String filename_point = "database/daypoint.csv";
   boolean set_TorF = true;
 
   void taskList() {
@@ -75,7 +76,6 @@ class todotask {
 
   void drawTask() {
     for (int i = 0; i < days; i++) {
-      taskList.get(i).todo_done_judge();
       judgeDraw(i);
     }
   }
@@ -85,25 +85,32 @@ class todotask {
       for (int i = 0; i < days; i++) {
         if (coordinateList[i*2] <= mouseX && mouseX < coordinateList[i*2]+100 && coordinateList[(i/7*7)*2+1] <= mouseY && mouseY < coordinateList[(i/7*7)*2+1]+100) {
           println((i+1)+"日が押された");
-          if (isTarget) {
-            taskList.get(i).delete_task();
-            csv_write();
-          } else {
-            if (i == 0) {
-              // task code
+          switch(mouseButton){
+            case LEFT:
+              if (isTarget) {
+              taskList.get(i).delete_task();
+              csv_write();
+              } else {
+                if (i == 0) {
+                  // task code
+                  nowday = i;
+                  taskList.get(i).day = i+1;
+                  condition = 3;
+                  mouseX = 0;
+                  mouseY = 0;
+                } else if (taskList.get(i-1).Todo[0].length() > 0) {
+                  // task code
+                  nowday = i;
+                  taskList.get(i).day = i+1;
+                  condition = 3;
+                  mouseX = 0;
+                  mouseY = 0;
+                }
+              }
+              break;
+            case RIGHT:
               nowday = i;
-              taskList.get(i).day = i+1;
-              condition = 3;
-              mouseX = 0;
-              mouseY = 0;
-            } else if (taskList.get(i-1).Todo[0].length() > 0) {
-              // task code
-              nowday = i;
-              taskList.get(i).day = i+1;
-              condition = 3;
-              mouseX = 0;
-              mouseY = 0;
-            }
+              break;
           }
         }
       }
@@ -151,13 +158,13 @@ class todotask {
   }
 
   void judgeDraw(int i) {
-    if (taskList.get(i).daypoint == 0) {
-    } else if (taskList.get(i).daypoint == 1) {
+    if (dayPointList[i] == 0) {//無し
+    } else if (dayPointList[i] == -1) {//×
       line(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, coordinateList[i*2]+50+15, coordinateList[(i/7*7)*2+1]+50+15);
       line(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, coordinateList[i*2]+50+15, coordinateList[(i/7*7)*2+1]+50-15);
       line(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, coordinateList[i*2]+50-15, coordinateList[(i/7*7)*2+1]+50+15);
       line(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, coordinateList[i*2]+50-15, coordinateList[(i/7*7)*2+1]+50-15);
-    } else if (taskList.get(i).daypoint == 2) {
+    } else if (dayPointList[i] == 1) {//○
       ellipse(coordinateList[i*2]+50, coordinateList[(i/7*7)*2+1]+50, 30, 30);
     }
   }
@@ -169,15 +176,15 @@ class todotask {
   }
 
   int calcPoint() {
-    dayPoint = 300;
+    dayPoint = 0;
     for (int i = 0; i < days; i++) {
-      dayPoint += dayPointList[i] - 1;
+      dayPoint += dayPointList[i];
     }
     return dayPoint;
   }
   
   void result(){
-    if (calcPoint() > clearPoint && isClear == false){
+    if (calcPoint() >= clearPoint && isClear == false){
       isClear = true;
       condition = 5;
     } else if (calcPoint() < clearPoint){
@@ -185,7 +192,9 @@ class todotask {
   }
   
   void key() {
-    if (isTarget == false && data.length() <= 50) {
+    if(keyCode == CONTROL){
+    }
+    else if (isTarget == false && data.length() <= 50) {
       keyData = key;
       if (key == BACKSPACE && data.length() > 0) {
         data = data.substring(0, data.length()-1);
@@ -196,11 +205,14 @@ class todotask {
       data = data.substring(0, data.length()-1);
     }
   }
+  
   void csv_write() {
-    String[] todo_data = loadStrings(filename);
+    String[] todo_data = loadStrings(filename_todo);
+    String[] point_data = loadStrings(filename_point);
     if (set_TorF) {
       for (int i=0; i<todo_data.length-1; i++) {
         String[] data = todo_data[i+1].split(",", -1);
+        dayPointList[i] = Integer.parseInt(point_data[i]);
         taskList.get(i).Todo = data[0].split("/", -1);
         taskList.get(i).Done = data[1].split("/", -1);
       }
@@ -218,10 +230,13 @@ class todotask {
           }
         }
         todo_data[i+1] = ""+csv_todo+","+csv_done;
+        point_data[i] = ""+dayPointList[i];
       }
     }
-    saveStrings(filename, todo_data);
+    saveStrings(filename_todo, todo_data);
+    saveStrings(filename_point, point_data);
   }
+  
   void back() {
     fill(255);
     rect(900, 100, 100, 50);

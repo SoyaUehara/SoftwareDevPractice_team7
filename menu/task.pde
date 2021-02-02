@@ -106,8 +106,6 @@ class task {
     mode = "";
     box_num = 0;
   }
-  void todo_done_judge() {
-  }
 
   void delete_task() {
     for (int i=0; i<9; i++){
