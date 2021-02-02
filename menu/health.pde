@@ -73,7 +73,6 @@ class health {
       task t = new task();
       taskList.add(t);
     }
-    csv_write();
   }
 
   void taskControll() {
@@ -216,22 +215,6 @@ class health {
     } else if (key == BACKSPACE && data.length() > 0) {
       data = data.substring(0, data.length()-1);
     }
-  }
-  void csv_write() {
-    String[] todo_data = loadStrings(filename);
-    if (set_TorF) {
-      for (int i=0; i<todo_data.length-1; i++) {
-        String[] data = todo_data[i+1].split(",", -1);
-        taskList.get(i).Todo = data[0];
-        taskList.get(i).Done = data[1];
-      }
-      set_TorF = false;
-    } else {
-      for (int i=0; i<todo_data.length-1; i++) {
-        todo_data[i+1] = ""+taskList.get(i).Todo+","+taskList.get(i).Done;
-      }
-    }
-    saveStrings(filename, todo_data);
   }
   void back() {
     fill(255);

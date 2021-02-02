@@ -96,7 +96,7 @@ class todotask {
               condition = 3;
               mouseX = 0;
               mouseY = 0;
-            } else if (taskList.get(i-1).Todo.length() > 0) {
+            } else if (taskList.get(i-1).Todo[0].length() > 0) {
               // task code
               nowday = i;
               taskList.get(i).day = i+1;
@@ -201,13 +201,23 @@ class todotask {
     if (set_TorF) {
       for (int i=0; i<todo_data.length-1; i++) {
         String[] data = todo_data[i+1].split(",", -1);
-        taskList.get(i).Todo = data[0];
-        taskList.get(i).Done = data[1];
+        taskList.get(i).Todo = data[0].split("/", -1);
+        taskList.get(i).Done = data[1].split("/", -1);
       }
       set_TorF = false;
     } else {
       for (int i=0; i<todo_data.length-1; i++) {
-        todo_data[i+1] = ""+taskList.get(i).Todo+","+taskList.get(i).Done;
+        String csv_todo = "";
+        String csv_done = "";
+        for(int j=0; j<9; j++){
+          csv_todo += taskList.get(i).Todo[j];
+          csv_done += taskList.get(i).Done[j];
+          if(j!=8){
+            csv_todo += "/";
+            csv_done += "/";
+          }
+        }
+        todo_data[i+1] = ""+csv_todo+","+csv_done;
       }
     }
     saveStrings(filename, todo_data);

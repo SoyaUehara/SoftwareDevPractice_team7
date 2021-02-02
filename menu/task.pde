@@ -1,6 +1,6 @@
 class task {
-  String Todo;
-  String Done;
+  String[] Todo;
+  String[] Done;
   String mode;
   int day;
   int daypoint;
@@ -9,13 +9,15 @@ class task {
   PImage done_image;
   int todoX = 500, todoY = 240;
   int doneX = 500, doneY = 440;
+  int box_num;
   health h;
 
   task() {
-    Todo = "";
-    Done = "";
+    Todo = new String[9];
+    Done = new String[9];
     todo_image = loadImage("to_do.png");
     done_image = loadImage("Done.png");
+    box_num = 0;
   }
 
   void todo_done() {//todoとdoneの表示
@@ -39,21 +41,31 @@ class task {
 
   void write() {
     if (mode == "T") {
-      Todo = task_key(Todo);
+      Todo[box_num] = task_key(Todo[box_num]);
     }
     if (mode == "D") {
-      Done = task_key(Done);
+      Done[box_num] = task_key(Done[box_num]);
     }
   }
 
   void write_print() {
+    task_drow();
+    judge();
     textSize(30);
     fill(0);
     if (mode == "T") {
-      text(Todo, width*0.5, height*0.5);
+      for(int i=0; i<3; i++){
+        for (int j=0; j<3; j++){
+          text(Todo[j+(i*3)], 150+120+240*j, 100+100+200*i);
+        }
+      }
     }
     if (mode == "D") {
-      text(Done, width*0.5, height*0.5);
+      for(int i=0; i<3; i++){
+        for (int j=0; j<3; j++){
+          text(Done[j+(i*3)], 150+120+240*j, 100+100+200*i);
+        }
+      }
     }
     base_print();
   }
@@ -74,7 +86,10 @@ class task {
   }
 
   String task_key(String d) {
-    if (d.length() <= 50) {
+    if (key == ENTER || key == ',' || key == '/'){
+      return d;
+    }
+    else if (d.length() <= 13) {
       k = key;
       if (key == BACKSPACE && d.length() > 0) {
         d = d.substring(0, d.length()-1);
@@ -89,22 +104,28 @@ class task {
 
   void mode_reset() {
     mode = "";
+    box_num = 0;
   }
-
   void todo_done_judge() {
-    if (Todo.length() > 0 && Done.length() > 0) {
-      if (Todo.equals(Done)) {
-        daypoint = 2;//todo達成
-      } else {
-        daypoint = 1;//todo未達成
-      }
-    } else {
-      daypoint = 0;//todoとdoneが無い
-    }
   }
 
   void delete_task() {
-    Todo = "";
-    Done = "";
+    for (int i=0; i<9; i++){
+      Todo[i] = "";
+      Done[i] = "";
+    }
+  }
+  void task_drow(){
+    fill(255);
+    rect(150, 100, 720, 600);
+    line(150+240,100, 150+240,700);
+    line(150+480,100, 150+480,700);
+    line(150,100+200, 150+720,100+200);
+    line(150,100+400, 150+720,100+400);
+  }
+  void judge(){
+    if(mousePressed == true && 150 <= mouseX && mouseX <= 870 && 100 <= mouseY && mouseY <= 700){
+      box_num = (int) (Math.floor((mouseX-150)/240)+Math.floor((mouseY-100)/200)*3);
+    }
   }
 }
