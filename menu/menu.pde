@@ -33,7 +33,7 @@ void setup() {
 }
 
 void draw() {
-  background(255, 255, 255);
+  background(197, 226, 182);
   if (condition == 0) {  // menu scene
     image(menu, menuX, menuY, 200, 100); 
     image(home, homeX, homeY, 200, 100); 
