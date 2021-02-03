@@ -85,20 +85,25 @@ class todotask {
       for (int i = 0; i < days; i++) {
         if (coordinateList[i*2] <= mouseX && mouseX < coordinateList[i*2]+100 && coordinateList[(i/7*7)*2+1] <= mouseY && mouseY < coordinateList[(i/7*7)*2+1]+100) {
           println((i+1)+"日が押された");
+          boolean task_TorF = false;
+          for (int j=0; j<9; j++) {
+            if (i==0) {
+              task_TorF = true;
+              break;
+            } else {
+              if (taskList.get(i-1).Todo[j].length() > 0) {
+                task_TorF = true;
+                break;
+              }
+            }
+          }
           switch(mouseButton) {
           case LEFT:
             if (isTarget) {
               taskList.get(i).delete_task();
               csv_write();
             } else {
-              if (i == 0) {
-                // task code
-                nowday = i;
-                taskList.get(i).day = i+1;
-                condition = 3;
-                mouseX = 0;
-                mouseY = 0;
-              } else if (taskList.get(i-1).Todo[0].length() > 0) {
+              if (task_TorF) {
                 // task code
                 nowday = i;
                 taskList.get(i).day = i+1;
