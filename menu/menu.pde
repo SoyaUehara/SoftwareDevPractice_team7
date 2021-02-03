@@ -41,7 +41,14 @@ void draw() {
     image(exercise, exerciseX, exerciseY, 200, 100); 
     image(health, healthX, healthY, 200, 100); 
     image(todo, todoX, todoY, 200, 100); 
-    image(exit, exitX, exitY, 200, 100); 
+    image(exit, exitX, exitY, 200, 100);
+
+
+    line(400, 120, 400, 660);
+    line(600, 120, 600, 660);
+    for (int i=0; i<7; i++) {
+      line(400, 120+i*90, 600, 120+i*90);
+    }
     image(people, peopleX, peopleY, 520, 157);
   } else if (condition == 1) {
     PFont font = createFont("HiraMaruProN-W4", 24);
@@ -66,10 +73,9 @@ void draw() {
   } else if (condition == 11) {
     background(255, 255, 255);
     HEL.task();
-  } else if (condition == 5){
-    background(255,255,255);
+  } else if (condition == 5) {
+    background(255, 255, 255);
     gameClear();
-
   }
 }
 void mousePressed() {
@@ -90,22 +96,19 @@ void mousePressed() {
 
 void mouseClicked() {
   if (condition == 0) {
-    if (mouseX >= 450 && mouseX <= 550 && mouseY >= 500 && mouseY <= 560) {
+    if (mouseX >= 400 && mouseX <= 600 && mouseY >= 480 && mouseY < 570) {
       condition = 1 ;
-    } else if (mouseX >= 450 && mouseX <= 550 && mouseY >= 440 && mouseY <= 500) {
+    } else if (mouseX >= 400 && mouseX <= 600 && mouseY >= 390 && mouseY < 480) {
       condition = 10 ;
-    } else if (mouseX >= 450 && mouseX <= 550 && mouseY >= 560 && mouseY <= 620) {
+    } else if (mouseX >= 400 && mouseX <= 600 && mouseY >= 570 && mouseY <= 660) {
       exit();
     }
-  }
-  else if(condition == 1 && (mouseButton == RIGHT || (keyPressed == true && keyCode == CONTROL))){
-    if(TDT.dayPointList[TDT.nowday] == 0){
+  } else if (condition == 1 && (mouseButton == RIGHT || (keyPressed == true && keyCode == CONTROL))) {
+    if (TDT.dayPointList[TDT.nowday] == 0) {
       TDT.dayPointList[TDT.nowday] = 1;
-    }
-    else if(TDT.dayPointList[TDT.nowday] == 1){
+    } else if (TDT.dayPointList[TDT.nowday] == 1) {
       TDT.dayPointList[TDT.nowday] = -1;
-    }
-    else if(TDT.dayPointList[TDT.nowday] == -1){
+    } else if (TDT.dayPointList[TDT.nowday] == -1) {
       TDT.dayPointList[TDT.nowday] = 0;
     }
   }
@@ -114,7 +117,7 @@ void mouseClicked() {
 void keyPressed() {
   if (condition == 1) {
     TDT.key();
-    } else if (condition == 10) {
+  } else if (condition == 10) {
     HEL.key();
   } else if (condition == 4) {
     TDT.taskList.get(TDT.nowday).write();
@@ -136,9 +139,9 @@ void motion() {
 void gameClear() {
   text("GameClear", 1000/2, 800/2);
   fill(255);
-  rect(450,550,100,50);
+  rect(450, 550, 100, 50);
   fill(0);
-  text("back",(450 + 550)/2, (550 + 600)/2);
+  text("back", (450 + 550)/2, (550 + 600)/2);
   if (mousePressed == true) {
     if (450 <= mouseX && mouseX < 550 && 550 <= mouseY && mouseY < 600 && TDT.isClear == true) {
       mouse_reset();

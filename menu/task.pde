@@ -54,15 +54,15 @@ class task {
     textSize(30);
     fill(0);
     if (mode == "T") {
-      for(int i=0; i<3; i++){
-        for (int j=0; j<3; j++){
+      for (int i=0; i<3; i++) {
+        for (int j=0; j<3; j++) {
           text(Todo[j+(i*3)], 150+120+240*j, 100+100+200*i);
         }
       }
     }
     if (mode == "D") {
-      for(int i=0; i<3; i++){
-        for (int j=0; j<3; j++){
+      for (int i=0; i<3; i++) {
+        for (int j=0; j<3; j++) {
           text(Done[j+(i*3)], 150+120+240*j, 100+100+200*i);
         }
       }
@@ -86,10 +86,9 @@ class task {
   }
 
   String task_key(String d) {
-    if (key == ENTER || key == ',' || key == '/'){
+    if (key == ENTER || key == ',' || key == '/') {
       return d;
-    }
-    else if (d.length() <= 13) {
+    } else if (d.length() <= 13) {
       k = key;
       if (key == BACKSPACE && d.length() > 0) {
         d = d.substring(0, d.length()-1);
@@ -108,21 +107,21 @@ class task {
   }
 
   void delete_task() {
-    for (int i=0; i<9; i++){
+    for (int i=0; i<9; i++) {
       Todo[i] = "";
       Done[i] = "";
     }
   }
-  void task_drow(){
+  void task_drow() {
     fill(255);
     rect(150, 100, 720, 600);
-    line(150+240,100, 150+240,700);
-    line(150+480,100, 150+480,700);
-    line(150,100+200, 150+720,100+200);
-    line(150,100+400, 150+720,100+400);
+    line(150+240, 100, 150+240, 700);
+    line(150+480, 100, 150+480, 700);
+    line(150, 100+200, 150+720, 100+200);
+    line(150, 100+400, 150+720, 100+400);
   }
-  void judge(){
-    if(mousePressed == true && 150 <= mouseX && mouseX <= 870 && 100 <= mouseY && mouseY <= 700){
+  void judge() {
+    if (mousePressed == true && 150 <= mouseX && mouseX <= 870 && 100 <= mouseY && mouseY <= 700) {
       box_num = (int) (Math.floor((mouseX-150)/240)+Math.floor((mouseY-100)/200)*3);
     }
   }

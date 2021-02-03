@@ -15,7 +15,7 @@ class health {
   boolean clearTarget = false;
 
   boolean isAchivement = false;
-  
+
   boolean isSetTextArea = false;
 
   char keyData;
@@ -24,8 +24,8 @@ class health {
   int pressEnterKey = 0;
   String filename = "database/todo.csv";
   boolean set_TorF = true;
-  
-  
+
+
   int red;
   int yello;
   int green;
@@ -67,7 +67,7 @@ class health {
       println("もっと頑張りましょう");
     }
   }
-    void taskList() {
+  void taskList() {
     taskList = new ArrayList();
     for (int i=0; i<exercise; i++) {
       task t = new task();
@@ -99,24 +99,24 @@ class health {
         y += 1;
       }  
       if (exe == 1) {
-       motion = "run";
-      } else if(exe == 2){
+        motion = "run";
+      } else if (exe == 2) {
         motion = "bike";
-      } else if(exe == 3){
+      } else if (exe == 3) {
         motion = "walkFast";
-      } else if(exe == 4){
+      } else if (exe == 4) {
         motion = "climbStairs";
-      } else if(exe == 5){
+      } else if (exe == 5) {
         motion = "skippingRope";
-      } else if(exe == 6){
+      } else if (exe == 6) {
         motion = "bathng";
-      } else if(exe == 7){
+      } else if (exe == 7) {
         motion = "cleanUp";
-      } else if(exe == 8){
+      } else if (exe == 8) {
         motion = "";
-      } else if(exe == 9){
+      } else if (exe == 9) {
         motion = "";
-      } else if(exe == 10){
+      } else if (exe == 10) {
         motion = "";
       } 
       fill(0);
@@ -143,7 +143,7 @@ class health {
   }
 
   void task() {
-    text("500kcl",500,200);
+    text("500kcl", 500, 200);
   }
 
   void targetPress() {

@@ -16,9 +16,9 @@ class todotask {
   boolean clearTarget = false;
 
   boolean isAchivement = false;
-  
+
   boolean isSetTextArea = false;
-   
+
   boolean isClear = false;
   boolean isDrawClear = false;
 
@@ -85,32 +85,32 @@ class todotask {
       for (int i = 0; i < days; i++) {
         if (coordinateList[i*2] <= mouseX && mouseX < coordinateList[i*2]+100 && coordinateList[(i/7*7)*2+1] <= mouseY && mouseY < coordinateList[(i/7*7)*2+1]+100) {
           println((i+1)+"日が押された");
-          switch(mouseButton){
-            case LEFT:
-              if (isTarget) {
+          switch(mouseButton) {
+          case LEFT:
+            if (isTarget) {
               taskList.get(i).delete_task();
               csv_write();
-              } else {
-                if (i == 0) {
-                  // task code
-                  nowday = i;
-                  taskList.get(i).day = i+1;
-                  condition = 3;
-                  mouseX = 0;
-                  mouseY = 0;
-                } else if (taskList.get(i-1).Todo[0].length() > 0) {
-                  // task code
-                  nowday = i;
-                  taskList.get(i).day = i+1;
-                  condition = 3;
-                  mouseX = 0;
-                  mouseY = 0;
-                }
+            } else {
+              if (i == 0) {
+                // task code
+                nowday = i;
+                taskList.get(i).day = i+1;
+                condition = 3;
+                mouseX = 0;
+                mouseY = 0;
+              } else if (taskList.get(i-1).Todo[0].length() > 0) {
+                // task code
+                nowday = i;
+                taskList.get(i).day = i+1;
+                condition = 3;
+                mouseX = 0;
+                mouseY = 0;
               }
-              break;
-            case RIGHT:
-              nowday = i;
-              break;
+            }
+            break;
+          case RIGHT:
+            nowday = i;
+            break;
           }
         }
       }
@@ -182,19 +182,18 @@ class todotask {
     }
     return dayPoint;
   }
-  
-  void result(){
-    if (calcPoint() >= clearPoint && isClear == false){
+
+  void result() {
+    if (calcPoint() >= clearPoint && isClear == false) {
       isClear = true;
       condition = 5;
-    } else if (calcPoint() < clearPoint){
+    } else if (calcPoint() < clearPoint) {
     }
   }
-  
+
   void key() {
-    if(keyCode == CONTROL){
-    }
-    else if (isTarget == false && data.length() <= 50) {
+    if (keyCode == CONTROL) {
+    } else if (isTarget == false && data.length() <= 50) {
       keyData = key;
       if (key == BACKSPACE && data.length() > 0) {
         data = data.substring(0, data.length()-1);
@@ -205,7 +204,7 @@ class todotask {
       data = data.substring(0, data.length()-1);
     }
   }
-  
+
   void csv_write() {
     String[] todo_data = loadStrings(filename_todo);
     String[] point_data = loadStrings(filename_point);
@@ -221,10 +220,10 @@ class todotask {
       for (int i=0; i<todo_data.length-1; i++) {
         String csv_todo = "";
         String csv_done = "";
-        for(int j=0; j<9; j++){
+        for (int j=0; j<9; j++) {
           csv_todo += taskList.get(i).Todo[j];
           csv_done += taskList.get(i).Done[j];
-          if(j!=8){
+          if (j!=8) {
             csv_todo += "/";
             csv_done += "/";
           }
@@ -236,7 +235,7 @@ class todotask {
     saveStrings(filename_todo, todo_data);
     saveStrings(filename_point, point_data);
   }
-  
+
   void back() {
     fill(255);
     rect(900, 100, 100, 50);
